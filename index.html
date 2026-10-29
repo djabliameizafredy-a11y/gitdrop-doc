@@ -19,21 +19,54 @@
 </ul></div></div></nav>
 
 <main>
-<section class="hero text-center py-5"><div class="container py-4" style="max-width:860px">
-<img src="assets/logo.svg" width="72" height="72" alt="Logo Gitdrop" class="mb-3" style="border-radius:22px">
-<div><span class="pill">v1.0 · open source · MIT</span></div>
-<h1 class="display-5 fw-bold mt-3">Drop your project.<br><span class="text-primary">Push to GitHub.</span></h1>
-<p class="lead text-secondary mt-3">Gitdrop crée un dépôt GitHub et y pousse un dossier ou un <code>.zip</code> en quelques secondes — sans connaître les remotes, les branches ni <code>gh</code>. Et sans pousser vos secrets par accident.</p>
-<div class="d-flex gap-2 justify-content-center flex-wrap my-4">
-<a class="btn btn-primary btn-lg" href="utilisation.html">Voir comment l’utiliser <svg class="ico"><use href="#i-arrow-right"/></svg></a>
-<a class="btn btn-outline-primary btn-lg" href="architecture.html">Comment ça marche</a></div>
-<div class="term mx-auto" style="max-width:560px"><button class="copy" data-copy="npm install -g gitdrop">Copier</button><span class="d">$</span> <span class="p">npm install -g gitdrop</span>
+<section class="hero hero-showcase" aria-labelledby="hero-title" data-hero>
+<canvas class="hero-shader" data-hero-shader aria-hidden="true"></canvas>
+<div class="container hero-shell">
+<div class="hero-top">
+<div class="hero-signals" aria-label="Fonctionnalités Gitdrop">
+<span>/ CLI GITHUB</span>
+<span>/ SECRETS PROTÉGÉS</span>
+<span>/ INTERFACE LOCALE</span>
+</div>
+<p class="hero-intro">Un dossier ou un .zip devient un dépôt GitHub en quelques secondes. Gitdrop s’occupe des étapes techniques et vérifie ce que vous envoyez.</p>
+</div>
+<div class="hero-bottom">
+<div class="hero-copy">
+<span class="hero-badge"><span aria-hidden="true"></span> Open source · MIT · v1.0</span>
+<h1 id="hero-title">Drop your project.<br><span>Push to GitHub.</span></h1>
+<p class="hero-description">Publiez votre projet sans vous perdre dans les remotes, les branches ou les secrets.</p>
+<div class="hero-actions">
+<a class="btn hero-btn-primary" href="utilisation.html">Publier mon projet <svg class="ico"><use href="#i-arrow-right"/></svg></a>
+<a class="btn hero-btn-secondary" href="architecture.html">Découvrir Gitdrop</a>
+</div>
+<button class="hero-motion-toggle" type="button" data-motion-toggle aria-pressed="false">
+<svg class="ico" aria-hidden="true"><use href="#i-zap"/></svg>
+<span data-motion-label>Mettre l’animation en pause</span>
+</button>
+</div>
+<div class="hero-terminal" data-tilt>
+<div class="hero-terminal-head"><div class="hero-terminal-dots" aria-hidden="true"><span></span><span></span><span></span></div><span>SESSION GITDROP</span><button class="copy" type="button" data-copy="gitdrop push ./mon-projet" aria-label="Copier la commande affichée">Copier</button></div>
+<div class="hero-terminal-tabs" role="tablist" aria-label="Choisir le type de projet">
+<button class="hero-terminal-tab is-active" id="tab-folder" type="button" role="tab" aria-selected="true" aria-controls="panel-folder" data-command-tab="folder">Un dossier</button>
+<button class="hero-terminal-tab" id="tab-archive" type="button" role="tab" aria-selected="false" aria-controls="panel-archive" data-command-tab="archive" tabindex="-1">Une archive .zip</button>
+</div>
+<div class="term hero-terminal-panel" id="panel-folder" role="tabpanel" aria-labelledby="tab-folder" data-command-panel="folder" data-copy="gitdrop push ./mon-projet">
+<span class="d">$</span> <span class="p">npm install -g gitdrop</span>
 <span class="d">$</span> <span class="p">gitdrop push ./mon-projet</span>
-<span class="p">✔</span> Projet analysé : ▲ Next.js — 42 fichiers (1.2 Mo)
-<span class="p">✔</span> Création du dépôt GitHub
-<span class="p">✔</span> Envoi vers GitHub (branche main)
-
-🔗 <span class="u">https://github.com/vous/mon-projet</span></div>
+<span class="p">✔</span> Projet analysé : Next.js · 42 fichiers
+<span class="p">✔</span> Secrets vérifiés · dépôt créé
+<span class="p">✔</span> Push terminé sur <span class="u">main</span>
+<span class="d">↳</span> <span class="u">github.com/vous/mon-projet</span></div>
+<div class="term hero-terminal-panel" id="panel-archive" role="tabpanel" aria-labelledby="tab-archive" data-command-panel="archive" data-copy="gitdrop push ./mon-site.zip" hidden>
+<span class="d">$</span> <span class="p">npm install -g gitdrop</span>
+<span class="d">$</span> <span class="p">gitdrop push ./mon-site.zip</span>
+<span class="p">✔</span> Archive extraite · contenu vérifié
+<span class="p">✔</span> Fichiers sensibles écartés
+<span class="p">✔</span> Push terminé sur <span class="u">main</span>
+<span class="d">↳</span> <span class="u">github.com/vous/mon-site</span></div>
+<div class="hero-terminal-foot"><svg class="ico"><use href="#i-shield-check"/></svg><span>Vos fichiers restent sur votre machine jusqu’au push vers GitHub.</span></div>
+</div>
+</div>
 </div></section>
 
 <section class="container py-5"><div class="row g-4 align-items-center">
@@ -41,19 +74,19 @@
 <p class="text-secondary">Pour un débutant, passer d’un dossier à un dépôt GitHub, c’est <code>git init</code>, <code>add</code>, <code>commit</code>, un remote, une branche, une authentification… et un risque : pousser un fichier <code>.env</code> avec une clé API, qui devient alors publique.</p>
 <p class="mb-0">Gitdrop remplace tout cela par une seule commande guidée, et vérifie ce qui part avant que ce soit trop tard.</p></div>
 <div class="col-lg-6"><div class="steps">
-<div class="step"><strong>Déposez</strong><br><span class="text-secondary">un dossier, des fichiers ou un .zip — en CLI ou par glisser-déposer dans l’interface locale.</span></div>
-<div class="step"><strong>Gitdrop analyse</strong><br><span class="text-secondary">stack, fichiers sensibles, historique Git, .gitignore et README à générer.</span></div>
-<div class="step"><strong>Poussez</strong><br><span class="text-secondary">commit local, création du dépôt, push sur <code>main</code>, lien affiché — et site en ligne si vous le souhaitez.</span></div></div></div>
+<div class="step" data-reveal><strong>Déposez</strong><br><span class="text-secondary">un dossier, des fichiers ou un .zip — en CLI ou par glisser-déposer dans l’interface locale.</span></div>
+<div class="step" data-reveal><strong>Gitdrop analyse</strong><br><span class="text-secondary">stack, fichiers sensibles, historique Git, .gitignore et README à générer.</span></div>
+<div class="step" data-reveal><strong>Poussez</strong><br><span class="text-secondary">commit local, création du dépôt, push sur <code>main</code>, lien affiché — et site en ligne si vous le souhaitez.</span></div></div></div>
 </div></section>
 
 <section class="container pb-5"><h2 class="fw-bold text-center mb-4">Ce que Gitdrop apporte</h2>
 <div class="row g-3 row-cols-1 row-cols-md-2 row-cols-lg-3">
-<div class="col"><div class="card hv h-100 p-3"><div class="ico-box mb-3"><svg class="ico"><use href="#i-zap"/></svg></div><h3 class="h6 fw-bold">Push en quelques secondes</h3><p class="small text-secondary mb-0">Un dossier ou un .zip devient un dépôt GitHub : commit, création, push sur main. Les droits d’exécution des scripts sont conservés.</p></div></div>
-<div class="col"><div class="card hv h-100 p-3"><div class="ico-box mb-3"><svg class="ico"><use href="#i-shield-check"/></svg></div><h3 class="h6 fw-bold">Secrets protégés</h3><p class="small text-secondary mb-0">Une quinzaine de formats de clés reconnus (AWS, GitHub, OpenAI, Stripe…), .env exclus par défaut, et un .env.example sans valeurs créé pour vous.</p></div></div>
-<div class="col"><div class="card hv h-100 p-3"><div class="ico-box mb-3"><svg class="ico"><use href="#i-history"/></svg></div><h3 class="h6 fw-bold">Historique Git scanné</h3><p class="small text-secondary mb-0">Un secret commité puis supprimé reste dans l’historique. Gitdrop le trouve, indique où révoquer la clé, et propose de ne publier qu’un commit propre.</p></div></div>
-<div class="col"><div class="card hv h-100 p-3"><div class="ico-box mb-3"><svg class="ico"><use href="#i-globe"/></svg></div><h3 class="h6 fw-bold">Site en ligne</h3><p class="small text-secondary mb-0">Site statique, Vite ou Create React App : GitHub Pages est activé et le workflow de déploiement ajouté, avec le bon chemin de base.</p></div></div>
-<div class="col"><div class="card hv h-100 p-3"><div class="ico-box mb-3"><svg class="ico"><use href="#i-git-branch"/></svg></div><h3 class="h6 fw-bold">Après le premier push</h3><p class="small text-secondary mb-0">Messages de commit générés depuis le diff, branche + pull request, push automatique à chaque modification (watch) et annulation sûre (undo).</p></div></div>
-<div class="col"><div class="card hv h-100 p-3"><div class="ico-box mb-3"><svg class="ico"><use href="#i-package"/></svg></div><h3 class="h6 fw-bold">Sans Node, si vous préférez</h3><p class="small text-secondary mb-0">En plus de npm, un binaire autonome (Linux, macOS, Windows) avec l’interface intégrée. Il suffit d’avoir Git installé.</p></div></div>
+<div class="col"><div class="card hv h-100 p-3 feature-card" data-reveal data-tilt><div class="ico-box mb-3"><svg class="ico"><use href="#i-zap"/></svg></div><h3 class="h6 fw-bold">Push en quelques secondes</h3><p class="small text-secondary mb-0">Un dossier ou un .zip devient un dépôt GitHub : commit, création, push sur main. Les droits d’exécution des scripts sont conservés.</p></div></div>
+<div class="col"><div class="card hv h-100 p-3 feature-card" data-reveal data-tilt><div class="ico-box mb-3"><svg class="ico"><use href="#i-shield-check"/></svg></div><h3 class="h6 fw-bold">Secrets protégés</h3><p class="small text-secondary mb-0">Une quinzaine de formats de clés reconnus (AWS, GitHub, OpenAI, Stripe…), .env exclus par défaut, et un .env.example sans valeurs créé pour vous.</p></div></div>
+<div class="col"><div class="card hv h-100 p-3 feature-card" data-reveal data-tilt><div class="ico-box mb-3"><svg class="ico"><use href="#i-history"/></svg></div><h3 class="h6 fw-bold">Historique Git scanné</h3><p class="small text-secondary mb-0">Un secret commité puis supprimé reste dans l’historique. Gitdrop le trouve, indique où révoquer la clé, et propose de ne publier qu’un commit propre.</p></div></div>
+<div class="col"><div class="card hv h-100 p-3 feature-card" data-reveal data-tilt><div class="ico-box mb-3"><svg class="ico"><use href="#i-globe"/></svg></div><h3 class="h6 fw-bold">Site en ligne</h3><p class="small text-secondary mb-0">Site statique, Vite ou Create React App : GitHub Pages est activé et le workflow de déploiement ajouté, avec le bon chemin de base.</p></div></div>
+<div class="col"><div class="card hv h-100 p-3 feature-card" data-reveal data-tilt><div class="ico-box mb-3"><svg class="ico"><use href="#i-git-branch"/></svg></div><h3 class="h6 fw-bold">Après le premier push</h3><p class="small text-secondary mb-0">Messages de commit générés depuis le diff, branche + pull request, push automatique à chaque modification (watch) et annulation sûre (undo).</p></div></div>
+<div class="col"><div class="card hv h-100 p-3 feature-card" data-reveal data-tilt><div class="ico-box mb-3"><svg class="ico"><use href="#i-package"/></svg></div><h3 class="h6 fw-bold">Sans Node, si vous préférez</h3><p class="small text-secondary mb-0">En plus de npm, un binaire autonome (Linux, macOS, Windows) avec l’interface intégrée. Il suffit d’avoir Git installé.</p></div></div>
 </div></section>
 
 <section class="container pb-5" style="max-width:900px"><h2 class="fw-bold mb-3">Et par rapport aux alternatives ?</h2>
@@ -66,7 +99,7 @@
 <tr><td>Interface graphique locale</td><td class="no">non</td><td class="no">non</td><td class="ok fw-semibold">oui</td></tr>
 <tr><td>Mettre le site en ligne</td><td class="no">à la main</td><td class="no">à la main</td><td class="ok fw-semibold">une option</td></tr></tbody></table></div></section>
 
-<section class="container pb-5"><div class="card p-4 p-md-5 text-center" style="background:var(--gd-soft);border-color:var(--gd-line)">
+<section class="container pb-5"><div class="card p-4 p-md-5 text-center" data-reveal style="background:var(--gd-soft);border-color:var(--gd-line)">
 <h2 class="fw-bold">Vos fichiers restent chez vous</h2>
 <p class="text-secondary mx-auto mb-4" style="max-width:640px">Aucun serveur Gitdrop : l’outil tourne sur votre machine et ne parle qu’à GitHub. Votre jeton est stocké localement avec des droits restreints (<code>0600</code>) et n’apparaît jamais dans le projet, l’URL du remote ni la liste des processus.</p>
 <div><a class="btn btn-primary" href="utilisation.html">Commencer</a> <a class="btn btn-outline-primary" href="architecture.html">Voir l’architecture</a></div></div></section>
