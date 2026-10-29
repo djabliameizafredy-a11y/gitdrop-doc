@@ -27,12 +27,24 @@
 
 <section id="install" class="mt-5"><h2 class="h3 fw-bold">Installation</h2>
 <p>Prérequis dans tous les cas : <strong>Git</strong> installé et dans le <code>PATH</code>.</p>
-<ul class="nav nav-pills mb-3" role="tablist"><li class="nav-item"><button class="nav-link active" data-bs-toggle="pill" data-bs-target="#t-npm">npm</button></li><li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#t-bin">Binaire (sans Node)</button></li><li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#t-src">Depuis les sources</button></li></ul>
-<div class="tab-content"><div class="tab-pane fade show active" id="t-npm"><p class="small text-secondary">Node.js ≥ 20 requis.</p><div class="term"><button class="copy" data-copy="npm install -g gitdrop">Copier</button><span class="d">$</span> <span class="p">npm install -g gitdrop</span>
+<ul class="nav nav-pills mb-3" role="tablist" aria-label="Méthodes d’installation">
+<li class="nav-item" role="presentation"><button class="nav-link active" id="install-source-tab" role="tab" aria-selected="true" aria-controls="t-src" data-bs-toggle="pill" data-bs-target="#t-src">Depuis les sources</button></li>
+<li class="nav-item" role="presentation"><button class="nav-link" id="install-npm-tab" role="tab" aria-selected="false" aria-controls="t-npm" data-bs-toggle="pill" data-bs-target="#t-npm" tabindex="-1">npm</button></li>
+<li class="nav-item" role="presentation"><button class="nav-link" id="install-bin-tab" role="tab" aria-selected="false" aria-controls="t-bin" data-bs-toggle="pill" data-bs-target="#t-bin" tabindex="-1">Binaire autonome</button></li></ul>
+<div class="tab-content">
+<div class="tab-pane fade show active" id="t-src" role="tabpanel" aria-labelledby="install-source-tab">
+<p>Le dépôt GitHub est public et peut être cloné par tous. Prérequis : <strong>Git</strong>, <strong>Node.js 20 ou plus récent</strong> et npm.</p>
+<p class="small text-secondary">Clonez le dépôt, construisez l’application, puis liez la commande <code>gitdrop</code> à votre installation locale de Node.js.</p>
+<div class="term"><button class="copy" data-copy="git clone https://github.com/djabliameizafredy-a11y/gitdrop.git&#10;cd gitdrop&#10;npm ci&#10;npm run build&#10;npm link">Copier</button><span class="d">$</span> <span class="p">git clone https://github.com/djabliameizafredy-a11y/gitdrop.git</span>
+<span class="d">$</span> <span class="p">cd gitdrop</span>
+<span class="d">$</span> <span class="p">npm ci</span>
+<span class="d">$</span> <span class="p">npm run build</span>
+<span class="d">$</span> <span class="p">npm link</span>
 <span class="d">$</span> <span class="p">gitdrop --version</span></div></div>
-<div class="tab-pane fade" id="t-bin"><p class="small text-secondary">macOS / Linux (remplacez <code>OWNER/gitdrop</code> par le dépôt des releases). Windows : <code>install.ps1</code>. La somme SHA-256 est vérifiée avant l’installation.</p><div class="term"><button class="copy" data-copy="curl -fsSL https://github.com/OWNER/gitdrop/releases/latest/download/install.sh | sh">Copier</button><span class="d">$</span> <span class="p">curl -fsSL https://github.com/OWNER/gitdrop/releases/latest/download/install.sh | sh</span></div></div>
-<div class="tab-pane fade" id="t-src"><div class="term"><span class="d">$</span> <span class="p">npm install &amp;&amp; npm run build</span>
-<span class="d">$</span> <span class="p">npm link</span>   <span class="d"># crée la commande gitdrop</span></div></div></div></section>
+<div class="tab-pane fade" id="t-npm" role="tabpanel" aria-labelledby="install-npm-tab">
+<div class="alert alert-info mb-0">Le paquet <code>gitdrop</code> n’est pas encore publié sur npm. L’installation globale par <code>npm install -g gitdrop</code> n’est donc pas disponible. Utilisez l’installation depuis les sources ci-dessus.</div></div>
+<div class="tab-pane fade" id="t-bin" role="tabpanel" aria-labelledby="install-bin-tab">
+<div class="alert alert-info mb-0">Aucun binaire précompilé n’est encore publié. Les futurs installateurs et binaires seront disponibles dans les <a href="https://github.com/djabliameizafredy-a11y/gitdrop/releases">releases de Gitdrop</a>. En attendant, utilisez l’installation depuis les sources.</div></div></div></section>
 
 <section id="login" class="mt-5"><h2 class="h3 fw-bold">Connexion GitHub</h2>
 <p>À faire une seule fois. Le <strong>Device Flow</strong> évite de copier un jeton à la main :</p>

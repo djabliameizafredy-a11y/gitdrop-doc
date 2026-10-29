@@ -51,14 +51,12 @@
 <button class="hero-terminal-tab" id="tab-archive" type="button" role="tab" aria-selected="false" aria-controls="panel-archive" data-command-tab="archive" tabindex="-1">Une archive .zip</button>
 </div>
 <div class="term hero-terminal-panel" id="panel-folder" role="tabpanel" aria-labelledby="tab-folder" data-command-panel="folder" data-copy="gitdrop push ./mon-projet">
-<span class="d">$</span> <span class="p">npm install -g gitdrop</span>
 <span class="d">$</span> <span class="p">gitdrop push ./mon-projet</span>
 <span class="p">✔</span> Projet analysé : Next.js · 42 fichiers
 <span class="p">✔</span> Secrets vérifiés · dépôt créé
 <span class="p">✔</span> Push terminé sur <span class="u">main</span>
 <span class="d">↳</span> <span class="u">github.com/vous/mon-projet</span></div>
 <div class="term hero-terminal-panel" id="panel-archive" role="tabpanel" aria-labelledby="tab-archive" data-command-panel="archive" data-copy="gitdrop push ./mon-site.zip" hidden>
-<span class="d">$</span> <span class="p">npm install -g gitdrop</span>
 <span class="d">$</span> <span class="p">gitdrop push ./mon-site.zip</span>
 <span class="p">✔</span> Archive extraite · contenu vérifié
 <span class="p">✔</span> Fichiers sensibles écartés
@@ -86,7 +84,7 @@
 <div class="col"><div class="card hv h-100 p-3 feature-card" data-reveal data-tilt><div class="ico-box mb-3"><svg class="ico"><use href="#i-history"/></svg></div><h3 class="h6 fw-bold">Historique Git scanné</h3><p class="small text-secondary mb-0">Un secret commité puis supprimé reste dans l’historique. Gitdrop le trouve, indique où révoquer la clé, et propose de ne publier qu’un commit propre.</p></div></div>
 <div class="col"><div class="card hv h-100 p-3 feature-card" data-reveal data-tilt><div class="ico-box mb-3"><svg class="ico"><use href="#i-globe"/></svg></div><h3 class="h6 fw-bold">Site en ligne</h3><p class="small text-secondary mb-0">Site statique, Vite ou Create React App : GitHub Pages est activé et le workflow de déploiement ajouté, avec le bon chemin de base.</p></div></div>
 <div class="col"><div class="card hv h-100 p-3 feature-card" data-reveal data-tilt><div class="ico-box mb-3"><svg class="ico"><use href="#i-git-branch"/></svg></div><h3 class="h6 fw-bold">Après le premier push</h3><p class="small text-secondary mb-0">Messages de commit générés depuis le diff, branche + pull request, push automatique à chaque modification (watch) et annulation sûre (undo).</p></div></div>
-<div class="col"><div class="card hv h-100 p-3 feature-card" data-reveal data-tilt><div class="ico-box mb-3"><svg class="ico"><use href="#i-package"/></svg></div><h3 class="h6 fw-bold">Sans Node, si vous préférez</h3><p class="small text-secondary mb-0">En plus de npm, un binaire autonome (Linux, macOS, Windows) avec l’interface intégrée. Il suffit d’avoir Git installé.</p></div></div>
+<div class="col"><div class="card hv h-100 p-3 feature-card" data-reveal data-tilt><div class="ico-box mb-3"><svg class="ico"><use href="#i-package"/></svg></div><h3 class="h6 fw-bold">Open source</h3><p class="small text-secondary mb-0">Le code source est disponible sur GitHub. Clonez le dépôt pour construire et installer Gitdrop localement.</p></div></div>
 </div></section>
 
 <section class="container pb-5" style="max-width:900px"><h2 class="fw-bold mb-3">Et par rapport aux alternatives ?</h2>
