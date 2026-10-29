@@ -1,0 +1,71 @@
+<div class="container py-5"><div class="row g-5">
+<aside class="col-lg-3 d-none d-lg-block"><nav class="side"><div class="small fw-bold text-uppercase text-secondary mb-2">Sur cette page</div>
+<a href="#vue">Vue d’ensemble</a><a href="#pipeline">Le pipeline d’un push</a><a href="#structure">Structure du dépôt</a><a href="#securite">Système de sécurité</a><a href="#distribution">Distribution</a><a href="#capacites">Capacités et limites</a><a href="#qualite">Qualité</a></nav></aside>
+<div class="col-lg-9" style="max-width:860px">
+<h1 class="fw-bold">Architecture de Gitdrop</h1><p class="lead text-secondary">Un cœur Node/TypeScript partagé, deux façons de l’utiliser (CLI et interface locale), et le vrai <code>git</code> pour publier.</p>
+
+<section id="vue" class="mt-5"><h2 class="h3 fw-bold">Vue d’ensemble</h2>
+<div class="card p-3"><svg class="diagram" viewBox="0 0 960 540" role="img" aria-label="Schéma d’architecture : terminal et navigateur, CLI et serveur local, cœur partagé, puis git, API GitHub et disque local">
+<defs><marker id="ar" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8z" fill="var(--gd)"/></marker></defs>
+<rect class="d-box" x="100" y="16" width="260" height="52" rx="12"/><text x="230" y="40" text-anchor="middle">Terminal</text><text class="s" x="230" y="57" text-anchor="middle">gitdrop push · update…</text>
+<rect class="d-box" x="600" y="16" width="260" height="52" rx="12"/><text x="730" y="40" text-anchor="middle">Navigateur</text><text class="s" x="730" y="57" text-anchor="middle">gitdrop ui · glisser-déposer</text>
+<rect class="d-box" x="100" y="116" width="260" height="72" rx="12"/><text x="230" y="144" text-anchor="middle">CLI</text><text class="s" x="230" y="163" text-anchor="middle">commander · prompts</text><text class="s" x="230" y="178" text-anchor="middle">src/cli.ts · src/commands/</text>
+<rect class="d-box" x="600" y="116" width="260" height="72" rx="12"/><text x="730" y="144" text-anchor="middle">Serveur local</text><text class="s" x="730" y="163" text-anchor="middle">127.0.0.1 · clé par lancement</text><text class="s" x="730" y="178" text-anchor="middle">API JSON + interface React</text>
+<rect class="d-core" x="60" y="250" width="840" height="140" rx="16"/><text x="480" y="276" text-anchor="middle">Cœur partagé — src/core/</text>
+<g><rect class="d-box" x="84" y="296" width="180" height="76" rx="10"/><text x="174" y="320" text-anchor="middle">Analyse</text><text class="s" x="174" y="340" text-anchor="middle">detect · walk</text><text class="s" x="174" y="356" text-anchor="middle">secrets · history</text></g>
+<g><rect class="d-box" x="282" y="296" width="180" height="76" rx="10"/><text x="372" y="320" text-anchor="middle">Préparation</text><text class="s" x="372" y="340" text-anchor="middle">gitignore · readme</text><text class="s" x="372" y="356" text-anchor="middle">license · env · deploy</text></g>
+<g><rect class="d-box" x="480" y="296" width="180" height="76" rx="10"/><text x="570" y="320" text-anchor="middle">Publication</text><text class="s" x="570" y="340" text-anchor="middle">push · update</text><text class="s" x="570" y="356" text-anchor="middle">commitmsg · project</text></g>
+<g><rect class="d-box" x="678" y="296" width="198" height="76" rx="10"/><text x="777" y="320" text-anchor="middle">Accès</text><text class="s" x="777" y="340" text-anchor="middle">git · github</text><text class="s" x="777" y="356" text-anchor="middle">auth · config</text></g>
+<rect class="d-box" x="100" y="452" width="220" height="64" rx="12"/><text x="210" y="478" text-anchor="middle">Git local</text><text class="s" x="210" y="498" text-anchor="middle">init · commit · push</text>
+<rect class="d-box" x="370" y="452" width="220" height="64" rx="12"/><text x="480" y="478" text-anchor="middle">API GitHub</text><text class="s" x="480" y="498" text-anchor="middle">dépôt · Pages · PR</text>
+<rect class="d-box" x="640" y="452" width="220" height="64" rx="12"/><text x="750" y="478" text-anchor="middle">Disque local</text><text class="s" x="750" y="498" text-anchor="middle">~/.config/gitdrop · tmp</text>
+<path class="d-line" marker-end="url(#ar)" d="M230 68V116M730 68V116M230 188V250M730 188V250M210 390V452M480 390V452M750 390V452"/></svg></div>
+<p class="mt-3 text-secondary">La CLI et le serveur local appellent <strong>exactement le même cœur</strong> : un comportement identique, testé une seule fois. L’interface est une application React compilée en fichiers statiques, servie par le serveur local.</p></section>
+
+<section id="pipeline" class="mt-5"><h2 class="h3 fw-bold">Le pipeline d’un push</h2>
+<div class="steps">
+<div class="step"><strong>Préparation des fichiers</strong><br><span class="text-secondary"><code>.gitignore</code>, README, licence, <code>.env.example</code> et CI générés si absents ; dépôt Git initialisé ; dossiers techniques et fichiers exclus écrits dans <code>.git/info/exclude</code>, sans toucher aux fichiers du projet.</span></div>
+<div class="step"><strong>Commit local</strong><br><span class="text-secondary">Si la machine n’a pas d’identité Git, l’auteur est le compte GitHub (adresse <code>noreply</code>).</span></div>
+<div class="step"><strong>Création du dépôt GitHub</strong><br><span class="text-secondary">Seulement maintenant : une erreur locale ne laisse jamais de dépôt vide. Un dépôt vide homonyme (push interrompu) est réutilisé.</span></div>
+<div class="step"><strong>Push sur <code>main</code></strong><br><span class="text-secondary">Avec le vrai <code>git</code>. En mode « historique propre », un seul commit est créé à partir de l’arbre courant ; l’historique local reste intact.</span></div>
+<div class="step"><strong>Pages (optionnel, non bloquant)</strong><br><span class="text-secondary">Pages est activé <em>avant</em> d’ajouter le workflow dans un second commit, pour que son premier run n’échoue pas. Un échec ici n’annule pas le dépôt.</span></div></div></section>
+
+<section id="structure" class="mt-5"><h2 class="h3 fw-bold">Structure du dépôt</h2>
+<div class="term"><button class="copy" data-copy="gitdrop/">Copier</button>gitdrop/
+├─ src/
+│  ├─ cli.ts                 <span class="d">point d’entrée (commander)</span>
+│  ├─ commands/              <span class="d">push · update · watch · undo · deploy · ui · login…</span>
+│  ├─ core/                  <span class="d">logique partagée par la CLI et le serveur</span>
+│  │  ├─ detect · walk · secrets · history        <span class="d">analyse</span>
+│  │  ├─ gitignore · readme · license · envexample · deploy   <span class="d">préparation</span>
+│  │  ├─ git · github · auth · config             <span class="d">accès</span>
+│  │  └─ push · update · commitmsg · project      <span class="d">pipeline</span>
+│  └─ server/index.ts        <span class="d">serveur local (node:http)</span>
+├─ ui/                       <span class="d">interface : React + Vite + Tailwind → build statique</span>
+├─ scripts/build-binary.mjs  <span class="d">exécutable autonome (Node SEA)</span>
+├─ test/                     <span class="d">unitaires + bout en bout + faux GitHub</span>
+└─ .github/workflows/        <span class="d">ci · publish · release</span></div></section>
+
+<section id="securite" class="mt-5"><h2 class="h3 fw-bold">Système de sécurité</h2>
+<div class="row g-3 row-cols-1 row-cols-md-2">
+<div class="col"><div class="card h-100 p-3"><h3 class="h6 fw-bold"><svg class="ico"><use href="#i-key-round"/></svg> Jeton GitHub</h3><p class="small text-secondary mb-0">Stocké dans <code>~/.config/gitdrop/config.json</code> en <code>0600</code> (écriture atomique). Transmis à git par variables d’environnement : absent de l’URL du remote, de <code>.git/config</code> et de la liste des processus.</p></div></div>
+<div class="col"><div class="card h-100 p-3"><h3 class="h6 fw-bold"><svg class="ico"><use href="#i-server"/></svg> Serveur local</h3><p class="small text-secondary mb-0">Écoute sur <code>127.0.0.1</code> uniquement, exige une clé aléatoire générée à chaque lancement, et vérifie <code>Host</code> et <code>Origin</code> : les autres sites web et le DNS rebinding sont bloqués.</p></div></div>
+<div class="col"><div class="card h-100 p-3"><h3 class="h6 fw-bold"><svg class="ico"><use href="#i-shield-check"/></svg> Secrets</h3><p class="small text-secondary mb-0">Règles par fournisseur avec lien de révocation, détection par entropie, scan de l’historique (toutes branches, 64 Mo max, 30 résultats). Les secrets sont exclus même si le <code>.gitignore</code> est désactivé.</p></div></div>
+<div class="col"><div class="card h-100 p-3"><h3 class="h6 fw-bold"><svg class="ico"><use href="#i-package"/></svg> Archives .zip</h3><p class="small text-secondary mb-0">Protection zip-slip, taille déclarée vérifiée avant extraction (zip bomb), 90 Mo envoyés, 200 Mo extraits, 50 000 fichiers max. Espaces de travail purgés après 3 h.</p></div></div></div></section>
+
+<section id="distribution" class="mt-5"><h2 class="h3 fw-bold">Distribution</h2>
+<div class="table-responsive"><table class="table align-middle"><thead><tr><th></th><th>Paquet npm</th><th>Binaire autonome</th></tr></thead><tbody>
+<tr><td>Format</td><td>ESM, dépendances installées par npm</td><td>un fichier CommonJS embarqué dans Node (SEA)</td></tr>
+<tr><td>Interface</td><td>fichiers statiques dans le paquet</td><td>intégrée comme assets du binaire</td></tr>
+<tr><td>Prérequis</td><td>Node ≥ 20, Git</td><td>Git uniquement</td></tr>
+<tr><td>Taille</td><td>~200 Ko (3,8 Mo installé)</td><td>~121 Mo (Linux)</td></tr>
+<tr><td>Plateformes</td><td>toutes celles de Node</td><td>Linux, macOS, Windows — construits par la CI</td></tr></tbody></table></div></section>
+
+<section id="capacites" class="mt-5"><h2 class="h3 fw-bold">Capacités et limites</h2>
+<div class="row g-3"><div class="col-md-6"><div class="card h-100 p-3"><h3 class="h6 fw-bold ok"><svg class="ico"><use href="#i-check"/></svg> Ce que Gitdrop fait</h3><ul class="small mb-0"><li>Publier un dossier ou un .zip sur un compte GitHub personnel</li><li>Détecter la stack (Next.js, React, Laravel, Python, Flutter, Go…)</li><li>Protéger les secrets : fichiers, contenu, historique</li><li>Générer .gitignore, README, licence, CI, .env.example, topics</li><li>Publier sur GitHub Pages (statique, Vite, CRA)</li><li>Branche + pull request, <code>watch</code>, <code>undo</code></li></ul></div></div>
+<div class="col-md-6"><div class="card h-100 p-3"><h3 class="h6 fw-bold no"><svg class="ico"><use href="#i-x"/></svg> Ce qu’il ne fait pas (encore)</h3><ul class="small mb-0"><li>Organisations GitHub, GitLab, Bitbucket</li><li>Pages pour Next.js, Nuxt, SvelteKit (rendu serveur)</li><li>Git LFS : les fichiers de plus de 90 Mo sont ignorés (limite GitHub : 100 Mo)</li><li>Réécrire l’historique d’un dépôt déjà publié</li><li>Fonctionner sans Git installé</li></ul></div></div></div></section>
+
+<section id="qualite" class="mt-5"><h2 class="h3 fw-bold">Qualité</h2>
+<p>46 tests : 11 unitaires (règles de secrets, entropie, workflows Pages, messages de commit) et 35 de bout en bout. Ces derniers lancent le <strong>vrai CLI</strong> contre un faux serveur GitHub (REST, Device Flow, Pages, pull requests) et de vrais dépôts Git « bare ». La suite est rejouée contre le paquet npm installé proprement et contre le binaire autonome.</p>
+<p class="small text-secondary mb-0">Les tests simulent GitHub : un premier vrai push reste la meilleure validation avant de publier.</p></section>
+</div></div></div>

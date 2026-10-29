@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="fr">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Utilisation — Gitdrop</title><meta name="description" content="Gitdrop : poussez un dossier ou un .zip sur GitHub en quelques secondes, sans pousser vos secrets.">
+<link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+<script>try{var t=localStorage.getItem('gd-theme')}catch(e){}document.documentElement.dataset.bsTheme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')</script>
+<link rel="stylesheet" href="assets/vendor/bootstrap.min.css"><link rel="stylesheet" href="assets/css/gitdrop-docs.css"></head>
+
+<body data-current="utilisation">
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true"><symbol id="i-cloud-upload" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 13v8"/><path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"/><path d="m8 17 4-4 4 4"/></symbol><symbol id="i-terminal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19h8"/><path d="m4 17 6-6-6-6"/></symbol><symbol id="i-shield-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></symbol><symbol id="i-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></symbol><symbol id="i-git-branch" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" x2="6" y1="3" y2="15"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/></symbol><symbol id="i-history" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l4 2"/></symbol><symbol id="i-package" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z"/><path d="M12 22V12"/><polyline points="3.29 7 12 12 20.71 7"/><path d="m7.5 4.27 9 5.15"/></symbol><symbol id="i-cpu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20v2"/><path d="M12 2v2"/><path d="M17 20v2"/><path d="M17 2v2"/><path d="M2 12h2"/><path d="M2 17h2"/><path d="M2 7h2"/><path d="M20 12h2"/><path d="M20 17h2"/><path d="M20 7h2"/><path d="M7 20v2"/><path d="M7 2v2"/><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="8" y="8" width="8" height="8" rx="1"/></symbol><symbol id="i-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol><symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></symbol><symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol><symbol id="i-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></symbol><symbol id="i-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol><symbol id="i-key-round" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.586 17.414A2 2 0 0 0 2 18.828V21a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h1a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h.172a2 2 0 0 0 1.414-.586l.814-.814a6.5 6.5 0 1 0-4-4z"/><circle cx="16.5" cy="7.5" r=".5" fill="currentColor"/></symbol><symbol id="i-folder-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 14 1.5-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.54 6a2 2 0 0 1-1.95 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v2"/></symbol><symbol id="i-layers" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z"/><path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12"/><path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17"/></symbol><symbol id="i-server" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="8" x="2" y="2" rx="2" ry="2"/><rect width="20" height="8" x="2" y="14" rx="2" ry="2"/><line x1="6" x2="6.01" y1="6" y2="6"/><line x1="6" x2="6.01" y1="18" y2="18"/></symbol><symbol id="i-rocket" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></symbol><symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></symbol><symbol id="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></symbol><symbol id="i-github" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></symbol><symbol id="i-workflow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="8" height="8" x="3" y="3" rx="2"/><path d="M7 11v4a2 2 0 0 0 2 2h4"/><rect width="8" height="8" x="13" y="13" rx="2"/></symbol><symbol id="i-zap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></symbol><symbol id="i-monitor" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></symbol><symbol id="i-triangle-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></symbol><symbol id="i-file-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="m9 15 2 2 4-4"/></symbol></svg>
+<nav class="navbar navbar-expand-md sticky-top border-bottom"><div class="container">
+<a class="navbar-brand d-flex align-items-center gap-2 fw-bold" href="index.html"><img src="assets/logo.svg" class="brand-logo" alt=""><span>Gitdrop<small class="d-block fw-normal text-secondary" style="font-size:.68rem;line-height:1">Drop your project. Push to GitHub.</small></span></a>
+<button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nv" aria-label="Menu"><span class="navbar-toggler-icon"></span></button>
+<div class="collapse navbar-collapse" id="nv"><ul class="navbar-nav ms-auto align-items-md-center gap-md-1">
+<li><a class="nav-link" data-nav="presentation" href="index.html">Présentation</a></li>
+<li><a class="nav-link" data-nav="utilisation" href="utilisation.html">Utilisation</a></li>
+<li><a class="nav-link" data-nav="architecture" href="architecture.html">Architecture</a></li>
+<li><button class="btn btn-sm btn-outline-secondary ms-md-2" data-theme-toggle aria-label="Changer de thème"><svg class="ico i-moon"><use href="#i-moon"/></svg><svg class="ico i-sun"><use href="#i-sun"/></svg></button></li>
+</ul></div></div></nav>
+
+<main>
+<div class="container py-5"><div class="row g-5">
+<aside class="col-lg-3 d-none d-lg-block"><nav class="side"><div class="small fw-bold text-uppercase text-secondary mb-2">Sur cette page</div>
+<a href="#install">Installation</a><a href="#login">Connexion GitHub</a><a href="#push">Premier push</a><a href="#ui">Interface locale</a><a href="#secrets">Protéger ses secrets</a><a href="#site">Mettre un site en ligne</a><a href="#apres">Après le premier push</a><a href="#ref">Référence</a><a href="#faq">Dépannage</a></nav></aside>
+<div class="col-lg-9" style="max-width:820px">
+<h1 class="fw-bold">Utiliser Gitdrop</h1><p class="lead text-secondary">De l’installation au site en ligne, en quelques commandes.</p>
+
+<section id="install" class="mt-5"><h2 class="h3 fw-bold">Installation</h2>
+<p>Prérequis dans tous les cas : <strong>Git</strong> installé et dans le <code>PATH</code>.</p>
+<ul class="nav nav-pills mb-3" role="tablist"><li class="nav-item"><button class="nav-link active" data-bs-toggle="pill" data-bs-target="#t-npm">npm</button></li><li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#t-bin">Binaire (sans Node)</button></li><li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#t-src">Depuis les sources</button></li></ul>
+<div class="tab-content"><div class="tab-pane fade show active" id="t-npm"><p class="small text-secondary">Node.js ≥ 20 requis.</p><div class="term"><button class="copy" data-copy="npm install -g gitdrop">Copier</button><span class="d">$</span> <span class="p">npm install -g gitdrop</span>
+<span class="d">$</span> <span class="p">gitdrop --version</span></div></div>
+<div class="tab-pane fade" id="t-bin"><p class="small text-secondary">macOS / Linux (remplacez <code>OWNER/gitdrop</code> par le dépôt des releases). Windows : <code>install.ps1</code>. La somme SHA-256 est vérifiée avant l’installation.</p><div class="term"><button class="copy" data-copy="curl -fsSL https://github.com/OWNER/gitdrop/releases/latest/download/install.sh | sh">Copier</button><span class="d">$</span> <span class="p">curl -fsSL https://github.com/OWNER/gitdrop/releases/latest/download/install.sh | sh</span></div></div>
+<div class="tab-pane fade" id="t-src"><div class="term"><span class="d">$</span> <span class="p">npm install &amp;&amp; npm run build</span>
+<span class="d">$</span> <span class="p">npm link</span>   <span class="d"># crée la commande gitdrop</span></div></div></div></section>
+
+<section id="login" class="mt-5"><h2 class="h3 fw-bold">Connexion GitHub</h2>
+<p>À faire une seule fois. Le <strong>Device Flow</strong> évite de copier un jeton à la main :</p>
+<div class="term"><span class="d">$</span> <span class="p">gitdrop login</span>
+<span class="p">✔</span> Code généré
+
+  1. Ouvre  →  <span class="u">https://github.com/login/device</span>
+  2. Entre  →  ┌─────────────┐
+               │  ABCD-1234  │
+               └─────────────┘
+
+<span class="p">✔</span> Connecté : <strong>@vous</strong></div>
+<p class="mt-3 mb-1">Autres options :</p><ul class="mb-0"><li><code>gitdrop login --token ghp_…</code> — jeton personnel (scopes <code>repo</code> + <code>workflow</code>)</li><li><code>gitdrop login --gh</code> — réutilise votre session GitHub CLI</li><li>Scripts / CI : variable <code>GITDROP_TOKEN</code> (ou <code>GH_TOKEN</code> / <code>GITHUB_TOKEN</code>)</li></ul></section>
+
+<section id="push" class="mt-5"><h2 class="h3 fw-bold">Premier push</h2>
+<p>Donnez un dossier ou un <code>.zip</code> (le dossier courant par défaut). Gitdrop pose quelques questions :</p>
+<div class="term"><span class="d">$</span> <span class="p">gitdrop push ./mon-portfolio</span>
+<span class="p">✔</span> Projet analysé : ▲ Next.js — 42 fichiers (1.2 Mo)
+<span class="w">⚠</span> Dossiers techniques ignorés automatiquement : node_modules
+<span class="d">?</span> 1 fichier(s) sensible(s) détecté(s). Cochés = exclus du push : <span class="d">.env</span>
+<span class="d">?</span> Nom du dépôt GitHub : <span class="p">mon-portfolio</span>
+<span class="d">?</span> Visibilité : <span class="p">Privé</span>
+<span class="d">?</span> Ajouter un README ? <span class="p">Oui</span>
+<span class="d">?</span> Message du commit : <span class="p">Initial commit</span>
+<span class="d">?</span> Confirmer le push ? <span class="p">Oui</span>
+<span class="p">✔</span> Préparation des fichiers
+<span class="p">✔</span> Création du commit
+<span class="p">✔</span> Création du dépôt GitHub
+<span class="p">✔</span> Envoi vers GitHub (branche main)
+
+🔗 <span class="u">https://github.com/vous/mon-portfolio</span>  <span class="d">(44 fichiers)</span></div>
+<p class="mt-3">Sans aucune question : <code>gitdrop push ./projet --yes --public --name mon-projet</code>. Le dépôt est <strong>privé par défaut</strong>. Il n’est créé qu’après le commit local : une erreur locale ne laisse jamais de dépôt vide, et un push interrompu se relance tel quel.</p></section>
+
+<section id="ui" class="mt-5"><h2 class="h3 fw-bold">Interface locale</h2>
+<p>Pour glisser-déposer plutôt que taper : <code>gitdrop ui</code> ouvre une page sur <code>localhost</code> en quatre étapes — connexion, projet, configuration, envoi.</p>
+<div class="term"><span class="d">$</span> <span class="p">gitdrop ui</span>             <span class="d"># glisser-déposer un dossier ou un .zip</span>
+<span class="d">$</span> <span class="p">gitdrop ui ./mon-projet</span>  <span class="d"># analyse le dossier sur place, avec son historique Git</span></div>
+<p class="mt-3 mb-0 small text-secondary">Les navigateurs n’envoient jamais le dossier <code>.git</code> : pour analyser l’historique d’un projet, passez son chemin à <code>gitdrop ui</code>.</p></section>
+
+<section id="secrets" class="mt-5"><h2 class="h3 fw-bold">Protéger ses secrets</h2>
+<ul><li><strong>Fichiers sensibles</strong> (<code>.env</code>, clés privées, identifiants…) : exclus par défaut, et ajoutés au <code>.gitignore</code>. Un <code>.env.example</code> sans valeurs est créé à côté.</li>
+<li><strong>Clés dans le code</strong> : formats AWS, GitHub, OpenAI, Anthropic, Stripe, Slack, Google, SendGrid, npm, Twilio, Discord, Telegram, clés privées, URL de base de données, plus une détection par entropie. Les valeurs d’exemple sont ignorées.</li>
+<li><strong>Historique Git</strong> : si le dossier a déjà un <code>.git</code>, tout l’historique est analysé, même les fichiers supprimés depuis. Gitdrop affiche le lien pour <strong>révoquer</strong> chaque clé.</li></ul>
+<div class="term"><span class="d">$</span> <span class="p">gitdrop push . --fresh-history</span>   <span class="d"># GitHub ne reçoit qu’un seul commit propre</span></div>
+<p class="mt-3 mb-0">Votre historique local reste intact. En mode non interactif, un historique contenant des secrets bloque le push, sauf avec <code>--fresh-history</code> ou <code>--force</code>. <strong>Une clé déjà commitée doit être considérée comme compromise</strong> : révoquez-la quand même.</p></section>
+
+<section id="site" class="mt-5"><h2 class="h3 fw-bold">Mettre un site en ligne</h2>
+<div class="term"><span class="d">$</span> <span class="p">gitdrop push ./mon-site --public --deploy</span>
+<span class="p">✔</span> Publication sur GitHub Pages
+🔗 <span class="u">https://github.com/vous/mon-site</span>
+🌐 <span class="u">https://vous.github.io/mon-site/</span>  <span class="d">(en ligne dans ~1 minute)</span></div>
+<p class="mt-3">Projets supportés : <strong>site statique</strong> (<code>index.html</code>), <strong>Vite</strong> et <strong>Create React App</strong>, avec le chemin de base <code>/nom-du-dépôt/</code> géré. Pour un dépôt déjà poussé : <code>gitdrop deploy</code>.</p>
+<div class="alert alert-warning small mb-0">GitHub Pages sur un dépôt <strong>privé</strong> exige un plan GitHub payant : le push réussit, et Gitdrop indique que le site n’a pas été publié. Next.js, Nuxt et SvelteKit ne sont pas supportés pour l’instant.</div></section>
+
+<section id="apres" class="mt-5"><h2 class="h3 fw-bold">Après le premier push</h2>
+<div class="term"><span class="d">$</span> <span class="p">gitdrop update</span>                          <span class="d"># message généré : « feat: add login.js »</span>
+<span class="d">$</span> <span class="p">gitdrop update "fix: bug" -b fix/bug --pr</span>  <span class="d"># branche + pull request</span>
+<span class="d">$</span> <span class="p">gitdrop watch</span>                           <span class="d"># pousse chaque modification (5 s après la dernière)</span>
+<span class="d">$</span> <span class="p">gitdrop undo</span>                            <span class="d"># annule le dernier commit poussé</span></div>
+<p class="mt-3 mb-0">Le message suit les Conventional Commits, choisi selon ce qui a changé (<code>docs</code>, <code>test</code>, <code>chore(deps)</code>, <code>ci</code>, <code>feat</code>…). <code>undo</code> crée un commit d’annulation — jamais de force-push. <code>update</code> et <code>watch</code> refusent de pousser un fichier sensible sans <code>--force</code>.</p></section>
+
+<section id="ref" class="mt-5"><h2 class="h3 fw-bold">Référence</h2>
+<div class="table-responsive"><table class="table table-sm align-middle"><thead><tr><th>Commande</th><th>Rôle</th></tr></thead><tbody>
+<tr><td><code>push [chemin]</code></td><td>Publie un dossier ou un .zip</td></tr><tr><td><code>update [message]</code></td><td>Commit + push ; <code>-b</code> branche, <code>--pr</code> pull request</td></tr>
+<tr><td><code>watch [dossier]</code></td><td>Push automatique, avec garde-fou secrets</td></tr><tr><td><code>undo</code></td><td>Annule le dernier commit poussé</td></tr>
+<tr><td><code>deploy</code></td><td>Publie sur GitHub Pages un dépôt déjà poussé</td></tr><tr><td><code>ui [chemin]</code></td><td>Interface locale (<code>--port</code>, <code>--no-open</code>)</td></tr>
+<tr><td><code>login</code> · <code>logout</code> · <code>whoami</code></td><td>Connexion GitHub</td></tr><tr><td><code>history</code></td><td>Derniers dépôts créés</td></tr></tbody></table></div>
+<p class="small text-secondary mb-0">Options de <code>push</code> : <code>--name</code> · <code>--public</code>/<code>--private</code> · <code>--readme</code>/<code>--no-readme</code> · <code>--no-gitignore</code> · <code>--message</code> · <code>--description</code> · <code>--license mit|isc|unlicense</code> · <code>--ci</code> · <code>--deploy</code> · <code>--topics a,b</code> · <code>--fresh-history</code> · <code>--force</code> · <code>--no-env-example</code> · <code>--yes</code></p></section>
+
+<section id="faq" class="mt-5"><h2 class="h3 fw-bold">Dépannage</h2>
+<div class="accordion" id="acc">
+<div class="accordion-item"><h3 class="accordion-header"><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#q1">« Git n’est pas installé »</button></h3><div id="q1" class="accordion-collapse collapse" data-bs-parent="#acc"><div class="accordion-body">Gitdrop utilise le binaire <code>git</code>. Installez-le depuis git-scm.com, puis rouvrez le terminal.</div></div></div>
+<div class="accordion-item"><h3 class="accordion-header"><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#q2">« Accès refusé » ou « scope repo »</button></h3><div id="q2" class="accordion-collapse collapse" data-bs-parent="#acc"><div class="accordion-body">Le jeton n’a pas les bons droits. Relancez <code>gitdrop login</code> ; avec un jeton personnel, cochez <code>repo</code> et <code>workflow</code>.</div></div></div>
+<div class="accordion-item"><h3 class="accordion-header"><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#q3">« Un dépôt portant ce nom existe déjà »</button></h3><div id="q3" class="accordion-collapse collapse" data-bs-parent="#acc"><div class="accordion-body">Choisissez un autre nom. Si le dépôt existant est <em>vide</em> (push interrompu), Gitdrop le réutilise automatiquement.</div></div></div>
+<div class="accordion-item"><h3 class="accordion-header"><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#q4">Le push est bloqué : un secret a été détecté</button></h3><div id="q4" class="accordion-collapse collapse" data-bs-parent="#acc"><div class="accordion-body">GitHub refuse les pushs contenant certaines clés. Retirez-la du projet (ou de l’historique, avec <code>--fresh-history</code>), puis <strong>révoquez-la</strong>.</div></div></div>
+<div class="accordion-item"><h3 class="accordion-header"><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#q5">Le port 3737 est déjà utilisé</button></h3><div id="q5" class="accordion-collapse collapse" data-bs-parent="#acc"><div class="accordion-body">Lancez <code>gitdrop ui --port 4000</code>. Sans <code>--port</code>, Gitdrop essaie lui-même les ports suivants.</div></div></div>
+</div></section>
+</div></div></div>
+
+</main>
+<footer class="border-top py-4 mt-5"><div class="container d-flex flex-wrap justify-content-between gap-2 small text-secondary">
+<span><strong class="text-body">Gitdrop</strong> · v1.0.0 · licence MIT</span>
+<span>Projet indépendant, non affilié à GitHub.</span></div></footer>
+
+<script src="assets/vendor/bootstrap.bundle.min.js"></script>
+<script src="assets/js/site.js"></script>
+</body>
+</html>
